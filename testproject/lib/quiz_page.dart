@@ -18,6 +18,8 @@ class _QuizPageState extends State<QuizPage> {
   late ArCoreController arCoreController;
   int correctAnswers = 0;
   double dailyProgress = 0.0;
+  //should refactor alot of these into a data class
+
   final List<List<String>> options = [
     ['Paris', 'London', 'Berlin', 'Madrid'],
     ['English', 'Spanish', 'Portuguese', 'French'],
