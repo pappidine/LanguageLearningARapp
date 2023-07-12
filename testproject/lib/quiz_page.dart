@@ -10,6 +10,7 @@ class QuizPage extends StatefulWidget {
   static int dailyProgress = 0;
 
   @override
+  // ignore: library_private_types_in_public_api
   _QuizPageState createState() => _QuizPageState();
 }
 
@@ -18,8 +19,6 @@ class _QuizPageState extends State<QuizPage> {
   late ArCoreController arCoreController;
   int correctAnswers = 0;
   double dailyProgress = 0.0;
-  //should refactor alot of these into a data class
-
   final List<List<String>> options = [
     ['Paris', 'London', 'Berlin', 'Madrid'],
     ['English', 'Spanish', 'Portuguese', 'French'],
@@ -36,14 +35,15 @@ class _QuizPageState extends State<QuizPage> {
     'https://res.cloudinary.com/your-cloud-name/image/upload/your-model-url-2',
   ];
 
-  final List<String> questions = [
-    'What is the capital of France?',
-    'Which language is spoken in Brazil?',
-    'What is the currency of Japan?',
-    'Who painted the Mona Lisa?',
-    'Which planet is known as the Red Planet?',
-  ];
-
+  Map <String, String> questions = {
+    'What is the capital of France?':'Paris',
+    'Which language is spoken in Brazil?':'Spanish',
+    'What is the currency of Japan?':'Yen',
+    'Who painted the Mona Lisa?':'Leonardo da vinci',
+    'Which planet is known as the Red Planet?':'Mars',
+  }
+  
+ 
   int totalQuestions = 0;
 
   Future<bool> checkAnswer(String selectedOption, String correctAnswer) async {
@@ -103,6 +103,7 @@ class _QuizPageState extends State<QuizPage> {
     arCoreController.addArCoreNodeWithAnchor(arModelNode);
 
     // Present the AR view
+    // ignore: use_build_context_synchronously
     await Navigator.push(
       context,
       MaterialPageRoute(
