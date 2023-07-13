@@ -129,6 +129,7 @@ class _QuizPageState extends State<QuizPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Quiz Page'),
@@ -138,6 +139,8 @@ class _QuizPageState extends State<QuizPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
+              width: size.width * 0.9,
+              height: size.height * 0.4,
               padding: const EdgeInsets.all(16.0),
               margin: const EdgeInsets.symmetric(horizontal: 16.0),
               decoration: BoxDecoration(
@@ -155,18 +158,29 @@ class _QuizPageState extends State<QuizPage> {
             const SizedBox(height: 24.0),
             Column(
               children: options[totalQuestions].map((option) {
-                return ElevatedButton(
-                  onPressed: () async {
-                    bool allQuestionsAnswered =
-                        await checkAnswer(option, options[totalQuestions][0]);
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  //TODO: make this buttons white
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      bool allQuestionsAnswered =
+                          await checkAnswer(option, options[totalQuestions][0]);
 
-                    if (allQuestionsAnswered) {
-                      navigateToResultPage();
-                    }
-                  },
-                  child: Text(
-                    option,
-                    style: const TextStyle(fontSize: 18),
+                      if (allQuestionsAnswered) {
+                        navigateToResultPage();
+                      }
+                    },
+                    //style: ButtonStyle().copyWith(),
+                    child: SizedBox(
+                      width: size.height * 0.7,
+                      height: size.width * 0.1,
+                      child: Center(
+                        child: Text(
+                          option,
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      ),
+                    ),
                   ),
                 );
               }).toList(),
