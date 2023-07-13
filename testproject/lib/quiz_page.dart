@@ -35,15 +35,14 @@ class _QuizPageState extends State<QuizPage> {
     'https://res.cloudinary.com/your-cloud-name/image/upload/your-model-url-2',
   ];
 
-  Map <String, String> questions = {
-    'What is the capital of France?':'Paris',
-    'Which language is spoken in Brazil?':'Spanish',
-    'What is the currency of Japan?':'Yen',
-    'Who painted the Mona Lisa?':'Leonardo da vinci',
-    'Which planet is known as the Red Planet?':'Mars',
-  }
-  
- 
+  Map<String, String> questions = {
+    'What is the capital of France?': 'Paris',
+    'Which language is spoken in Brazil?': 'Spanish',
+    'What is the currency of Japan?': 'Yen',
+    'Who painted the Mona Lisa?': 'Leonardo da vinci',
+    'Which planet is known as the Red Planet?': 'Mars',
+  };
+
   int totalQuestions = 0;
 
   Future<bool> checkAnswer(String selectedOption, String correctAnswer) async {
@@ -149,7 +148,7 @@ class _QuizPageState extends State<QuizPage> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Text(
-                questions[totalQuestions],
+                questions[totalQuestions]!,
                 style: const TextStyle(
                   fontSize: 24,
                   color: Colors.white,
