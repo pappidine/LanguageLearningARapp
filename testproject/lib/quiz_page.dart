@@ -45,6 +45,8 @@ class _QuizPageState extends State<QuizPage> {
 
   int totalQuestions = 0;
 
+  //String get keys =>  Iterable<String> qValues = questions.values;
+
   Future<bool> checkAnswer(String selectedOption, String correctAnswer) async {
     setState(() {
       if (selectedOption == correctAnswer) {
@@ -101,6 +103,8 @@ class _QuizPageState extends State<QuizPage> {
     // Add the 3D model node to the AR scene
     arCoreController.addArCoreNodeWithAnchor(arModelNode);
 
+    //
+
     // Present the AR view
     // ignore: use_build_context_synchronously
     await Navigator.push(
@@ -140,7 +144,7 @@ class _QuizPageState extends State<QuizPage> {
           children: [
             Container(
               width: size.width * 0.9,
-              height: size.height * 0.4,
+              height: size.height * 0.35,
               padding: const EdgeInsets.all(16.0),
               margin: const EdgeInsets.symmetric(horizontal: 16.0),
               decoration: BoxDecoration(
@@ -148,6 +152,7 @@ class _QuizPageState extends State<QuizPage> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Text(
+                //keys,
                 questions[totalQuestions].toString(),
                 style: const TextStyle(
                   fontSize: 24,
@@ -155,7 +160,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
             ),
-            const SizedBox(height: 24.0),
+            const SizedBox(height: 20.0),
             Column(
               children: options[totalQuestions].map((option) {
                 return Padding(
@@ -173,7 +178,7 @@ class _QuizPageState extends State<QuizPage> {
                     //style: ButtonStyle().copyWith(),
                     child: SizedBox(
                       width: size.height * 0.7,
-                      height: size.width * 0.1,
+                      height: size.width * 0.05,
                       child: Center(
                         child: Text(
                           option,
