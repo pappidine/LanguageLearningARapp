@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:testproject/model.dart';
 import 'package:testproject/result_page.dart';
 import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
+import 'package:testproject/utilities.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 import 'package:testproject/screens/localAndWebObjectsview.dart';
 
@@ -44,6 +46,8 @@ class _QuizPageState extends State<QuizPage> {
   };
 
   int totalQuestions = 0;
+
+  List<QuestionsModel> questionsContents = Utilities.QuestionsContentList();
 
   //String get keys =>  Iterable<String> qValues = questions.values;
 
@@ -153,7 +157,8 @@ class _QuizPageState extends State<QuizPage> {
               ),
               child: Text(
                 //keys,
-                questions[totalQuestions].toString(),
+                questionsContents[totalQuestions].question,
+                //questions[totalQuestions].toString(),
                 style: const TextStyle(
                   fontSize: 24,
                   color: Colors.white,
