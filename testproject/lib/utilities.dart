@@ -25,4 +25,29 @@ class Utilities {
       ),
     ];
   }
+
+  static List<OptionsModel> OptionsContentList() {
+    return [
+      OptionsModel(
+        option: ['Paris', 'London', 'Berlin', 'Madrid'],
+      ),
+      OptionsModel(
+        option: ['English', 'Spanish', 'Portuguese', 'French'],
+      ),
+      OptionsModel(
+        option: ['Yen', 'Dollar', 'Euro', 'Pound'],
+      ),
+      OptionsModel(
+        option: [
+          'Leonardo da Vinci',
+          'Pablo Picasso',
+          'Vincent van Gogh',
+          'Michelangelo'
+        ],
+      ),
+      OptionsModel(
+        option: ['Mars', 'Venus', 'Jupiter', 'Mercury'],
+      ),
+    ];
+  }
 }
