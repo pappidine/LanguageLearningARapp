@@ -11,3 +11,8 @@ class OptionsModel {
   List<String> option;
   OptionsModel({required this.option});
 }
+
+class QuestionsARModels {
+  String arLink;
+  QuestionsARModels({required this.arLink});
+}
