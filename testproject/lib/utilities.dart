@@ -51,5 +51,28 @@ class Utilities {
     ];
   }
 
-  static List<
+  static List<QuestionsARModels> QuestionsArModelContentList() {
+    return [
+      QuestionsARModels(
+        arLink:
+            'https://ar-3d-viewer.cloudinary.com/main.js/dqiuau49t/wwnnsthl4k-LibertyStatue_bhahfj',
+      ),
+      QuestionsARModels(
+        arLink:
+            'https://res.cloudinary.com/your-cloud-name/image/upload/your-model-url-2',
+      ),
+      QuestionsARModels(
+        arLink:
+            'https://res.cloudinary.com/your-cloud-name/image/upload/your-model-url-2',
+      ),
+      QuestionsARModels(
+        arLink:
+            'https://res.cloudinary.com/your-cloud-name/image/upload/your-model-url-2',
+      ),
+      QuestionsARModels(
+        arLink:
+            'https://res.cloudinary.com/your-cloud-name/image/upload/your-model-url-2',
+      ),
+    ];
+  }
 }
