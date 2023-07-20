@@ -1,7 +1,7 @@
 import 'package:testproject/model.dart';
 
 class Utilities {
-  static List<QuestionsModel> QuestionsContentList() {
+  static List<QuestionsModel> questionsContentList() {
     return [
       QuestionsModel(
         answer: 'Paris',
@@ -26,7 +26,7 @@ class Utilities {
     ];
   }
 
-  static List<OptionsModel> OptionsContentList() {
+  static List<OptionsModel> optionsContentList() {
     return [
       OptionsModel(
         option: ['Paris', 'London', 'Berlin', 'Madrid'],
@@ -51,7 +51,7 @@ class Utilities {
     ];
   }
 
-  static List<QuestionsARModels> QuestionsArModelContentList() {
+  static List<QuestionsARModels> questionsArModelContentList() {
     return [
       QuestionsARModels(
         arLink:
