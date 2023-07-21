@@ -21,33 +21,36 @@ class _QuizPageState extends State<QuizPage> {
   late ArCoreController arCoreController;
   int correctAnswers = 0;
   double dailyProgress = 0.0;
-  final List<List<String>> options = [
-    ['Paris', 'London', 'Berlin', 'Madrid'],
-    ['English', 'Spanish', 'Portuguese', 'French'],
-    ['Yen', 'Dollar', 'Euro', 'Pound'],
-    ['Leonardo da Vinci', 'Pablo Picasso', 'Vincent van Gogh', 'Michelangelo'],
-    ['Mars', 'Venus', 'Jupiter', 'Mercury'],
-  ];
+  // final List<List<String>> options = [
+  //   ['Paris', 'London', 'Berlin', 'Madrid'],
+  //   ['English', 'Spanish', 'Portuguese', 'French'],
+  //   ['Yen', 'Dollar', 'Euro', 'Pound'],
+  //   ['Leonardo da Vinci', 'Pablo Picasso', 'Vincent van Gogh', 'Michelangelo'],
+  //   ['Mars', 'Venus', 'Jupiter', 'Mercury'],
+  // ];
 
-  final List<String?> questionARModels = [
-    'https://ar-3d-viewer.cloudinary.com/main.js/dqiuau49t/wwnnsthl4k-LibertyStatue_bhahfj',
-    null,
-    null,
-    null,
-    'https://res.cloudinary.com/your-cloud-name/image/upload/your-model-url-2',
-  ];
+  // final List<String?> questionARModels = [
+  //   'https://ar-3d-viewer.cloudinary.com/main.js/dqiuau49t/wwnnsthl4k-LibertyStatue_bhahfj',
+  //   null,
+  //   null,
+  //   null,
+  //   'https://res.cloudinary.com/your-cloud-name/image/upload/your-model-url-2',
+  // ];
 
-  Map<String, String> questions = {
-    'What is the capital of France?': 'Paris',
-    'Which language is spoken in Brazil?': 'Spanish',
-    'What is the currency of Japan?': 'Yen',
-    'Who painted the Mona Lisa?': 'Leonardo da vinci',
-    'Which planet is known as the Red Planet?': 'Mars',
-  };
+  // Map<String, String> questions = {
+  //   'What is the capital of France?': 'Paris',
+  //   'Which language is spoken in Brazil?': 'Spanish',
+  //   'What is the currency of Japan?': 'Yen',
+  //   'Who painted the Mona Lisa?': 'Leonardo da vinci',
+  //   'Which planet is known as the Red Planet?': 'Mars',
+  // };
 
   int totalQuestions = 0;
 
-  List<QuestionsModel> questionsContents = Utilities.QuestionsContentList();
+  List<QuestionsModel> questions = Utilities.questionsContentList();
+  List<OptionsModel> options = Utilities.optionsContentList();
+  List<QuestionsARModels> questionARModel =
+      Utilities.questionsArModelContentList();
 
   //String get keys =>  Iterable<String> qValues = questions.values;
 
@@ -157,7 +160,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               child: Text(
                 //keys,
-                questionsContents[totalQuestions].question,
+                questions[totalQuestions].question,
                 //questions[totalQuestions].toString(),
                 style: const TextStyle(
                   fontSize: 24,
@@ -166,35 +169,37 @@ class _QuizPageState extends State<QuizPage> {
               ),
             ),
             const SizedBox(height: 20.0),
-            Column(
-              children: options[totalQuestions].map((option) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  //TODO: make this buttons white
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      bool allQuestionsAnswered =
-                          await checkAnswer(option, options[totalQuestions][0]);
+            Column(children: [
+              ListView.builder(
+                itemExtent: options.length.toDouble(),
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    //TODO: make this buttons white
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        bool allQuestionsAnswered = await checkAnswer(
+                            option, options[totalQuestions][0]);
 
-                      if (allQuestionsAnswered) {
-                        navigateToResultPage();
-                      }
-                    },
-                    //style: ButtonStyle().copyWith(),
-                    child: SizedBox(
-                      width: size.height * 0.7,
-                      height: size.width * 0.05,
-                      child: Center(
-                        child: Text(
-                          option,
-                          style: const TextStyle(fontSize: 18),
+                        if (allQuestionsAnswered) {
+                          navigateToResultPage();
+                        }
+                      },
+                      child: SizedBox(
+                        width: size.height * 0.7,
+                        height: size.width * 0.05,
+                        child: Center(
+                          child: Text(
+                            options[totalQuestions].option[index],
+                            style: const TextStyle(fontSize: 18),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                );
-              }).toList(),
-            ),
+                  );
+                },
+              ),
+            ]),
           ],
         ),
       ),
