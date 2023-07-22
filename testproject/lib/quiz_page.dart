@@ -179,7 +179,8 @@ class _QuizPageState extends State<QuizPage> {
                     child: ElevatedButton(
                       onPressed: () async {
                         bool allQuestionsAnswered = await checkAnswer(
-                            option, options[totalQuestions][0]);
+                            options[totalQuestions].option[index],
+                            questions[totalQuestions].answer);
 
                         if (allQuestionsAnswered) {
                           navigateToResultPage();
