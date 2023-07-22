@@ -169,9 +169,11 @@ class _QuizPageState extends State<QuizPage> {
               ),
             ),
             const SizedBox(height: 20.0),
-            Column(children: [
-              ListView.builder(
-                itemExtent: options.length.toDouble(),
+            SizedBox(
+              height: size.height * 0.45,
+              child: ListView.builder(
+                itemCount: options.length - 1,
+                // itemExtent: options.length.toDouble() - 1,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -200,7 +202,7 @@ class _QuizPageState extends State<QuizPage> {
                   );
                 },
               ),
-            ]),
+            ),
           ],
         ),
       ),
