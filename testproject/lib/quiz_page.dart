@@ -49,7 +49,7 @@ class _QuizPageState extends State<QuizPage> {
 
   List<QuestionsModel> questions = Utilities.questionsContentList();
   List<OptionsModel> options = Utilities.optionsContentList();
-  List<QuestionsARModels> questionARModel =
+  List<QuestionsARModels> questionARModels =
       Utilities.questionsArModelContentList();
 
   //String get keys =>  Iterable<String> qValues = questions.values;
@@ -58,10 +58,10 @@ class _QuizPageState extends State<QuizPage> {
     setState(() {
       if (selectedOption == correctAnswer) {
         correctAnswers++;
-        String? arModelUrl = questionARModels[totalQuestions];
-        if (arModelUrl != null) {
-          onLocalObjectButtonPressed(context, arModelUrl);
-        }
+        String? arModelUrl = questionARModels[totalQuestions].arLink;
+        //! ??? what is going on here
+        //! why does this accept null values
+        onLocalObjectButtonPressed(context, arModelUrl);
       }
 
       totalQuestions++;
