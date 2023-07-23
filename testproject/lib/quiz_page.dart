@@ -142,6 +142,7 @@ class _QuizPageState extends State<QuizPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white.withOpacity(0.9),
       appBar: AppBar(
         title: const Text('Quiz Page'),
       ),
@@ -188,13 +189,21 @@ class _QuizPageState extends State<QuizPage> {
                           navigateToResultPage();
                         }
                       },
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.white),
+                          padding: MaterialStateProperty.all(
+                              const EdgeInsets.all(4)),
+                          textStyle: MaterialStateProperty.all(
+                              const TextStyle(fontSize: 20))),
                       child: SizedBox(
-                        width: size.height * 0.7,
-                        height: size.width * 0.05,
+                        width: size.width * 0.7,
+                        height: size.height * 0.1,
                         child: Center(
                           child: Text(
                             options[totalQuestions].option[index],
-                            style: const TextStyle(fontSize: 18),
+                            style: const TextStyle(
+                                fontSize: 18, color: Colors.blue),
                           ),
                         ),
                       ),
