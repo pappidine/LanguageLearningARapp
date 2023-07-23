@@ -148,7 +148,7 @@ class _QuizPageState extends State<QuizPage> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Text(
-                questions[totalQuestions]!,
+                questions[totalQuestions].toString(),
                 style: const TextStyle(
                   fontSize: 24,
                   color: Colors.white,

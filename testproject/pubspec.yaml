@@ -31,7 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   url_launcher: ^6.1.11
-  camera: ^0.9.4+5
+  #camera: ^0.9.4+5
   translator: ^0.1.7
   arcore_flutter_plugin: ^0.1.0 # Replace 'x.x.x' with the latest version
   http: ^0.13.0 # Replace 'x.x.x' with the latest version
