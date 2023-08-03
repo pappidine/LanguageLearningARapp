@@ -35,6 +35,13 @@ android {
     namespace "com.example.testproject"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
+
+    
+    packagingOptions {
+        exclude 'META-INF/third_party.java_src.dagger.project.java.dagger.hilt.android_entry_point_accessors.kotlin_module'
+
+        exclude 'META-INF/java.com.google.apps.tiktok.conformance.lint.checks_suppression_annotations.kotlin_module'
+    }
     
 
     compileOptions {
