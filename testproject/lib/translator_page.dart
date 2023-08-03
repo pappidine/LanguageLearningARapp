@@ -1,18 +1,11 @@
 import 'dart:async';
-import 'dart:io';
+import 'dart:math';
+// import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:learning_input_image/learning_input_image.dart';
-// import 'package:learning_input_image/src/input_image.dart';
-// import 'package:learning_input_image/src/input_image.dart';
-// import 'dart:ui';
-// import 'package:firebase_ml_vision/firebase_ml_vision.dart';
-// import 'package:flutter_camera_ml_vision/flutter_camera_ml_vision.dart';
+import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:testproject/service/google_translate_service.dart';
-// import 'package:camera/camera.dart';
 import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
-import 'package:learning_text_recognition/learning_text_recognition.dart';
-//  import 'package:learning_input_image/learning_input_image.dart';
-// import 'package:ar_flutter_plugin/ar_flutter_plugin.dart';
+import 'package:camera/camera.dart';
 
 class TranslatorPage extends StatefulWidget {
   const TranslatorPage({super.key});
@@ -23,13 +16,12 @@ class TranslatorPage extends StatefulWidget {
 }
 
 class _TranslatorPageState extends State<TranslatorPage> {
-  // late CameraController _cameraController;
   late List<CameraDescription> _cameras;
   final bool _isCameraInitialized = false;
   bool _isARSupported = false;
   late ArCoreController _arCoreController;
-  final String _detectedText = '';
-  final String _translatedText = '';
+  String _detectedText = '';
+  String _translatedText = '';
 
   @override
   void initState() {
@@ -40,63 +32,46 @@ class _TranslatorPageState extends State<TranslatorPage> {
 
   @override
   void dispose() {
-    // _cameraController.dispose();
     _arCoreController.dispose();
     super.dispose();
   }
-
-  // Future<void> initializeCamera() async {
-  //   _cameras = await availableCameras();
-  //   _cameraController = CameraController(_cameras[0], ResolutionPreset.high);
-  //   await _cameraController.initialize();
-  //   setState(() {
-  //     _isCameraInitialized = true;
-  //   });
-  // }
 
   Future<void> checkARSupport() async {
     _isARSupported = await ArCoreController.checkArCoreAvailability();
   }
 
   Future<void> scanText() async {
-    try {
-      //final imageBytes = await _cameraController.takePicture();
-      //final text = await performOCR(imageBytes);
-      //final translation = await translateText(text as String);
-      // setState(() {
-      //   _detectedText = text as String;
-      //   _translatedText = translation;
-      // });
-    } catch (e) {
-      ('Error scanning text: $e');
+  try {
+    // Replace this with your image input logic
+    final inputImage = InputImage.fromFilePath('YOUR_IMAGE_FILE_PATH');
+    
+    final textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
+    final RecognizedText recognizedText = await textRecognizer.processImage(inputImage);
+
+    String text = recognizedText.text;
+    for (TextBlock block in recognizedText.blocks) {
+      final Rect rect = block.boundingBox;
+      final List<Point<int>> cornerPoints = block.cornerPoints;
+      final String text = block.text;
+      final List<String> languages = block.recognizedLanguages;
+
+      for (TextLine line in block.lines) {
+        // Same getters as TextBlock
+        for (TextElement element in line.elements) {
+          // Same getters as TextBlock
+        }
+      }
     }
+    
+    final translation = await translateText(text);
+    setState(() {
+      _detectedText = text;
+      _translatedText = translation;
+    });
+  } catch (e) {
+    print('Error scanning text: $e');
   }
-
-  Future<RecognizedText?> performOCR(XFile image) async {
-    final File file = File(image.path);
-    // final textRecognizer = TextRecognizer();
-    // final recognizedText = await textRecognizer.processImage(file);
-    // When using for Latin script
-    // TextRecognition textRecognition = TextRecognition();
-    // // or like this:
-    TextRecognition textRecognition =
-        TextRecognition(options: TextRecognitionOptions.Default);
-    // Process text recognition...
-    RecognizedText? recognizedText =
-        await textRecognition.process(file as InputImage);
-    // textRecognizer.close();
-    return recognizedText;
-  }
-//   InputCameraView(
-//   canSwitchMode = false,
-//   mode = InputCameraMode.gallery,
-//   title = 'Text Recognition',
-//   onImage = (InputImage image) {
-
-//   },
-//     // now we can feed the input image into text recognition process
-
-// ),
+}
 
   Future<String> translateText(String text) async {
     final googleTranslateService = GoogleTranslateService('YOUR_API_KEY');
@@ -116,11 +91,6 @@ class _TranslatorPageState extends State<TranslatorPage> {
           Expanded(
             child: Stack(
               children: [
-                // if (_isCameraInitialized)
-                //   AspectRatio(
-                //     aspectRatio: _cameraController.value.aspectRatio,
-                //     child: CameraPreview(_cameraController),
-                //   ),
                 if (_isARSupported)
                   ArCoreView(
                     onArCoreViewCreated: _onARCoreViewCreated,
@@ -162,3 +132,4 @@ class _TranslatorPageState extends State<TranslatorPage> {
     // Example: https://pub.dev/packages/arcore_flutter_plugin
   }
 }
+
